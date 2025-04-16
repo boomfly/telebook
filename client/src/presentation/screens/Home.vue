@@ -223,7 +223,7 @@ onBeforeUnmount(() => {
     <Placeholder
       ref="landing"
       class="landing"
-      title="Telebook"
+      title="ApartX"
       caption="As simple as messaging"
       :class="{
         'landing--loading': isLoading,
@@ -235,7 +235,7 @@ onBeforeUnmount(() => {
           <Transition name="switch">
             <img
               v-if="!isLoading"
-              src="/telebook.svg"
+              src="/logo.png"
               aria-hidden="true"
               width="68"
             >

@@ -68,6 +68,8 @@ const roomAmount = computed(() => {
  * Main button click handler
  */
 async function buttonClicked(): Promise<void> {
+  showAlert('Comming soon!')
+  return
   setButtonLoader(true)
 
   if (room.value === undefined) {
