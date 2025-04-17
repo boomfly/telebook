@@ -171,7 +171,7 @@ function reachGoal(goal = 'hotel_click') {
             :to="`/room/${hotel.id}/${room.id}`"
             big-avatar
             standalone
-            :onClick="() => { 
+            @click="() => { 
               reachGoal('room_click')
             }"
           >

@@ -346,7 +346,7 @@ function reachGoal(hotel, goal = 'hotel_click') {
                   :to="`/hotel/${hotel.id}`"
                   right-icon="chevron-right"
                   standalone
-                  :onClick="() => { 
+                  @click="() => { 
                     reachGoal(hotel, 'hotel_promo_click')
                   }"
                 />
@@ -371,7 +371,7 @@ function reachGoal(hotel, goal = 'hotel_click') {
                         :to="`/hotel/${hotel.id}`"
                         right-icon="chevron-right"
                         standalone
-                        :onClick="() => { 
+                        @click="() => { 
                           reachGoal(hotel, 'hotel_rooms_check_click')
                         }"
                       />
@@ -390,7 +390,7 @@ function reachGoal(hotel, goal = 'hotel_click') {
               big-avatar
               standalone
               :is-loading="isLoading"
-              :onClick="() => { 
+              @click="() => { 
                 reachGoal(hotel, 'hotel_click')
               }"
             >

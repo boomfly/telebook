@@ -7,6 +7,7 @@ import Location from '@/presentation/screens/Location.vue'
 declare global {
   interface Window {
     ym: (...args: any[]) => void;
+    YM_ID: string;
   }
 }
 

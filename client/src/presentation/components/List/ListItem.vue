@@ -65,11 +65,6 @@ const props = defineProps<{
   nowrap?: boolean;
 
   /**
-   * Click handler for the list item
-   */
-  onClick?: () => void;
-
-  /**
    * Loading state
    */
   isLoading?: boolean;
@@ -141,8 +136,7 @@ const pictureStyle = computed(() => {
  * Handle click event
  */
 const handleClick = (event: MouseEvent) => {
-  // emit('click', event)
-  props.onClick?.()
+  emit('click', event)
 }
 </script>
 
