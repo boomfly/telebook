@@ -63,6 +63,20 @@ const props = defineProps<{
    * Whether to display subtitle in one line
    */
   nowrap?: boolean;
+
+  /**
+   * Click handler for the list item
+   */
+  onClick?: () => void;
+
+  /**
+   * Loading state
+   */
+  isLoading?: boolean;
+}>()
+
+const emit = defineEmits<{
+  (e: 'click', event: MouseEvent): void
 }>()
 
 const slots = useSlots()
@@ -122,6 +136,14 @@ const pictureStyle = computed(() => {
 
   return 'circle'
 })
+
+/**
+ * Handle click event
+ */
+const handleClick = (event: MouseEvent) => {
+  // emit('click', event)
+  props.onClick?.()
+}
 </script>
 
 <template>
@@ -132,8 +154,10 @@ const pictureStyle = computed(() => {
       'list-item--standalone': standalone,
       'list-item--big-avatar': bigAvatar,
       'list-item--nowrap': nowrap,
+      'list-item--loading': isLoading,
     }"
     :to="to"
+    @click="handleClick"
   >
     <div
       class="left-col"

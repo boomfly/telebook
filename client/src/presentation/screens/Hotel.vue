@@ -109,6 +109,15 @@ onBeforeUnmount(() => {
 
   easterEgg.stop()
 })
+
+function reachGoal(goal = 'hotel_click') {
+  try {
+    const ymId = window.YM_ID
+    window.ym(ymId, 'reachGoal', goal)
+  } catch(error) {
+    console.error('Yandex Metrica error', error)
+  }
+}
 </script>
 <template>
   <div v-if="hotel">
@@ -162,6 +171,9 @@ onBeforeUnmount(() => {
             :to="`/room/${hotel.id}/${room.id}`"
             big-avatar
             standalone
+            :onClick="() => { 
+              reachGoal('room_click')
+            }"
           >
             <template #picture>
               <Avatar

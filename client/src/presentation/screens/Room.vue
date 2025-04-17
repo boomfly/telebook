@@ -64,10 +64,20 @@ const roomAmount = computed(() => {
   return room.value.price * days.value + transfer
 })
 
+function reachGoal(goal = 'hotel_click') {
+  try {
+    const ymId = window.YM_ID
+    window.ym(ymId, 'reachGoal', goal)
+  } catch(error) {
+    console.error('Yandex Metrica error', error)
+  }
+}
+
 /**
  * Main button click handler
  */
 async function buttonClicked(): Promise<void> {
+  reachGoal('hotel_pay_click')
   showAlert('Comming soon!')
   return
   setButtonLoader(true)

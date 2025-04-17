@@ -4,6 +4,12 @@ import Hotel from '@/presentation/screens/Hotel.vue'
 import Room from '@/presentation/screens/Room.vue'
 import Location from '@/presentation/screens/Location.vue'
 
+declare global {
+  interface Window {
+    ym: (...args: any[]) => void;
+  }
+}
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -33,6 +39,17 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.afterEach((to) => {
+  const cleanPath = to.path // если надо убрать query и hash
+
+  console.log(`Navigated to: ${cleanPath}`, window.ym) // логируем путь
+
+  // hit вручную
+  if (typeof window.ym === 'function') {
+    window.ym(101128926, 'hit', cleanPath) // замените на свой ID
+  }
 })
 
 export default router

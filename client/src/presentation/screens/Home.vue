@@ -116,6 +116,12 @@ function onAfterSearch(): void {
  * Fake search method
  */
 function search(): void {
+  try {
+    const ymId = window.YM_ID || process.env.VITE_YANDEX_METRIKA_ID || import.meta.env.VITE_YANDEX_METRIKA_ID
+    window.ym(ymId, 'reachGoal', 'search_click')
+  } catch(error) {
+    console.error('Yandex Metrica error', error)
+  }
   onBeforeSearch()
 
   setTimeout(() => {
@@ -217,6 +223,15 @@ onBeforeUnmount(() => {
 onBeforeUnmount(() => {
   setButtonLoader(false)
 })
+
+function reachGoal(hotel, goal = 'hotel_click') {
+  try {
+    const ymId = window.YM_ID
+    window.ym(ymId, 'reachGoal', goal)
+  } catch(error) {
+    console.error('Yandex Metrica error', error)
+  }
+}
 </script>
 <template>
   <div class="home-page">
@@ -328,11 +343,13 @@ onBeforeUnmount(() => {
                   :title="hotel.title"
                   :subtitle="hotel.subtitle"
                   nowrap
-                >
-                  <template #right>
-                    <Rating :value="hotel.rating.rating" />
-                  </template>
-                </ListItem>
+                  :to="`/hotel/${hotel.id}`"
+                  right-icon="chevron-right"
+                  standalone
+                  :onClick="() => { 
+                    reachGoal(hotel, 'hotel_promo_click')
+                  }"
+                />
               </template>
               <template #collapsed>
                 <Sections>
@@ -354,6 +371,9 @@ onBeforeUnmount(() => {
                         :to="`/hotel/${hotel.id}`"
                         right-icon="chevron-right"
                         standalone
+                        :onClick="() => { 
+                          reachGoal(hotel, 'hotel_rooms_check_click')
+                        }"
                       />
                     </List>
                   </Section>
@@ -370,6 +390,9 @@ onBeforeUnmount(() => {
               big-avatar
               standalone
               :is-loading="isLoading"
+              :onClick="() => { 
+                reachGoal(hotel, 'hotel_click')
+              }"
             >
               <template #right>
                 <div class="room-cell-right">
